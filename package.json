@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client:dev": "webpack --mode=development --watch --config webpack/development.js",
     "client:build": "webpack --config webpack/production.js && http-server public",
-    "server:dev": "nodemon src/server/app.js"
+    "server:dev": "nodemon src/server/app.js",
+    "server:start": "pm2 start src/server/app.js -i max",
+    "server:stop": "pm2 stop all && pm2 kill"
   },
   "keywords": [
     "Truecaller",
@@ -27,6 +29,8 @@
     "dayjs": "^1.8.28",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "log4js": "^6.3.0",
+    "pm2": "^4.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

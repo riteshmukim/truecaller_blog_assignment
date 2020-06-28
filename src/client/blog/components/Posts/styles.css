@@ -31,3 +31,9 @@
 .load-more-button:hover {
   color: black;
 }
+
+.blog-category {
+  padding: 8px 0;
+  text-align: right;
+  text-transform: capitalize;
+}

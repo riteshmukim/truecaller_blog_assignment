@@ -1,13 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import * as dayjs from "dayjs";
 import * as relativeTime from "dayjs/plugin/relativeTime";
 import DOMPurify from "dompurify";
 import * as HtmlToReact from "html-to-react";
 
 import "./styles.css";
-
-Article.propTypes = {};
 
 function Article({ post }) {
   const sanitize = DOMPurify.sanitize;

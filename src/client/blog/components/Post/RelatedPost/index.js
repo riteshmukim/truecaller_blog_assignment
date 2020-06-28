@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
 
 import PostItem from "../../Posts/PostItem";
-
-RelatedPosts.propTypes = {};
 
 function RelatedPosts({ post_id }) {
   const [relatedPosts, setRelatedPosts] = useState(null);
@@ -17,7 +14,6 @@ function RelatedPosts({ post_id }) {
         },
       })
       .then((res) => {
-        console.log(res);
         setRelatedPosts(res.data);
       })
       .catch((err) => console.log(err));

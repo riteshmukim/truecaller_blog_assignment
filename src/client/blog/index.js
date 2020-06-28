@@ -13,6 +13,7 @@ const Blog = () => {
       <Header />
       <Switch>
         <Route path="/blog/:slug" component={Post} exact={true} />
+        <Route path="/category/:slug" component={Home} exact={true} />
         <Route path="/" component={Home} />
       </Switch>
       <Footer />

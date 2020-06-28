@@ -2,12 +2,39 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const log = require("log4js").getLogger("app");
 
 const api = require("./api");
 
 const app = express();
 
-app.use(cors());
+log.level = process.env.LOGGER_LEVEL;
+
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(";")
+  : [];
+
+app.use(
+  cors(async (req, callback) => {
+    let corsOptions = {
+      origin: !req.headers.origin,
+      optionsSuccessStatus: 200,
+    };
+    if (
+      req.headers.origin &&
+      ALLOWED_ORIGINS.indexOf(req.headers.origin) !== -1
+    ) {
+      corsOptions.origin = true;
+    }
+    if (corsOptions.origin) {
+      callback(null, corsOptions);
+    } else {
+      callback(new Error(`Invalid origin: ${req.headers.origin}`));
+    }
+  })
+);
+
+app.disable("x-powered-by");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -36,6 +63,8 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
+  log.error(`application error: ${err.stack}`);
+
   // render the error page
   res.status(err.status || 500);
   res.json({ message: res.locals.message, error: res.locals.error });
@@ -43,4 +72,4 @@ app.use(function (err, req, res, next) {
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT);
-console.log("Server Listening on port:", PORT);
+log.info("Server Listening on port:", PORT);

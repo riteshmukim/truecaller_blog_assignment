@@ -12,7 +12,7 @@ router.get("/categories", async (req, res, next) => {
     })
     .then((response) => res.json(response.data))
     .catch((err) => {
-      console.log(err);
+      log.error(err);
       next(new Error(err));
     });
 });
@@ -29,7 +29,7 @@ router.get("/tags", async (req, res, next) => {
     })
     .then((response) => res.json(response.data))
     .catch((err) => {
-      console.log(err);
+      log.error(err);
       next(new Error(err));
     });
 });
@@ -38,7 +38,7 @@ router.get("/slug", (req, res, next) => {
   const slug = req.query.slug;
 
   axios
-    .get(BASE_URL + "posts/slug:" + slug, {
+    .get(`${BASE_URL}posts/slug:${slug}`, {
       params: {
         fields:
           "ID,title,date,content,featured_image,title,slug,author,categories",
@@ -46,7 +46,7 @@ router.get("/slug", (req, res, next) => {
     })
     .then((response) => res.json(response.data))
     .catch((err) => {
-      console.log(err);
+      log.error(err);
       next(new Error(err));
     });
 });
@@ -55,14 +55,14 @@ router.get("/related", (req, res, next) => {
   const id = req.query.post_id;
 
   axios
-    .post(BASE_URL + "posts/" + id + "/related", {
+    .post(`${BASE_URL}posts/${id}/related`, {
       size: 3,
     })
     .then(({ data: { hits } }) => {
       axios
         .all(
           hits.map((hit) =>
-            axios.get(BASE_URL + "posts/" + hit.fields.post_id, {
+            axios.get(`${BASE_URL}posts/${hit.fields.post_id}`, {
               params: {
                 fields: "ID,title,date,featured_image,slug",
               },
@@ -80,7 +80,7 @@ router.get("/related", (req, res, next) => {
         );
     })
     .catch((err) => {
-      console.log(err);
+      log.error(err);
       next(new Error(err));
     });
 });
@@ -92,14 +92,14 @@ router.get("/", (req, res, next) => {
     fields: "ID,title,date,excerpt,featured_image,title,slug,author,categories",
     ...queryParams,
   };
-  console.log(queryParams, params);
+
   axios
     .get(BASE_URL + "posts", {
       params,
     })
     .then((response) => res.json(response.data))
     .catch((err) => {
-      console.log(err);
+      log.error(err);
       next(new Error(err));
     });
 });

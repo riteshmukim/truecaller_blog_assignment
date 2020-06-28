@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as dayjs from "dayjs";
 import * as relativeTime from "dayjs/plugin/relativeTime";
@@ -10,8 +9,6 @@ import "./styles.css";
 
 const sanitize = DOMPurify.sanitize;
 const htmlToReactParser = new HtmlToReact.Parser();
-
-PostItem.propTypes = {};
 
 function PostItem({ post }) {
   dayjs.extend(relativeTime);

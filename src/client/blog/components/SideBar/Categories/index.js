@@ -9,7 +9,6 @@ function Categories() {
     axios
       .get("/api/posts/categories")
       .then((res) => {
-        console.log(res);
         setCategories(res.data.categories);
       })
       .catch((err) => console.log(err));

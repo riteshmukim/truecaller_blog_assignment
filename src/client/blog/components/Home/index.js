@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
 
 import Posts from "../Posts";
 import SideBar from "../SideBar";
 import HeaderImage from "./banner-image.jpg";
+import { useParams } from "react-router-dom";
 
-function Home(props) {
+function Home() {
+  const { slug = "" } = useParams();
   const [data, setData] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
 
   useEffect(() => {
     axios
-      .get("/api/posts")
+      .get("/api/posts", {
+        category: slug,
+      })
       .then((res) => {
-        console.log(res);
         setData(res.data);
       })
       .catch((err) => console.log(err));
@@ -26,15 +27,14 @@ function Home(props) {
       .get("/api/posts", {
         params: {
           tag: selectedTag,
-          category: selectedCategory,
+          category: slug,
         },
       })
       .then((res) => {
-        console.log(res);
         setData(res.data);
       })
       .catch((err) => console.log(err));
-  }, [selectedTag, selectedCategory]);
+  }, [selectedTag, slug]);
 
   const handleLoadMore = () => {
     axios
@@ -45,7 +45,6 @@ function Home(props) {
         },
       })
       .then((res) => {
-        console.log(res);
         setData({
           ...data,
           ...res.data,
@@ -75,18 +74,17 @@ function Home(props) {
           margin: "auto",
         }}
       >
-        <SideBar
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          selectedTag={selectedTag}
-          setSelectedTag={setSelectedTag}
-        />
-        {data && <Posts posts={data.posts} handleLoadMore={handleLoadMore} />}
+        <SideBar selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
+        {data && (
+          <Posts
+            posts={data.posts}
+            category={slug}
+            handleLoadMore={handleLoadMore}
+          />
+        )}
       </div>
     </div>
   );
 }
-
-Home.propTypes = {};
 
 export default Home;

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import PropTypes from "prop-types";
 
 import Article from "./Article";
 import RelatedPosts from "./RelatedPost";
-
-Post.propTypes = {};
 
 function Post(props) {
   const { slug } = useParams();
@@ -20,7 +17,6 @@ function Post(props) {
         },
       })
       .then((res) => {
-        console.log(res);
         setPost(res.data);
       })
       .catch((err) => console.log(err));

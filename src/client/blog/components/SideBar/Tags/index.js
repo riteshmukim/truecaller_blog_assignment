@@ -9,7 +9,6 @@ function Tags({ selectedTag, setSelectedTag }) {
     axios
       .get("/api/posts/tags")
       .then((res) => {
-        console.log(res);
         setTags(res.data.tags);
       })
       .catch((err) => console.log(err));

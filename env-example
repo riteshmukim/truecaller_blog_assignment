@@ -1,0 +1,8 @@
+PORT=8080
+
+ALLOWED_ORIGINS=http://localhost:8080
+LOGGER_LEVEL=DEBUG
+
+SITE_URL=truecaller.blog
+SITE_ID=107403796
+WP_REST_API_HOST=https://public-api.wordpress.com/rest/v1.1/

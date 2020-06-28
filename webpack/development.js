@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
 
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 const WebpackNotifierPlugin = require("webpack-notifier");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -23,9 +22,6 @@ module.exports = {
       title: "Blog Watcher",
       alwaysNotify: true,
     }),
-    // new CleanWebpackPlugin({
-    //   cleanOnceBeforeBuildPatterns: ["**/*", "!*.html*"],
-    // }),
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,
       template: "src/client/index.html",
