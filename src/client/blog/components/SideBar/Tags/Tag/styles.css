@@ -1,0 +1,19 @@
+.tag-list-item {
+  /* background-color: #c8eaef; */
+  display: inline-flex;
+  padding: 4px 8px;
+  margin: 4px;
+  font-size: 0.75em;
+  border-radius: 12px;
+  border: solid 1px #cbcbcb;
+  cursor: pointer;
+}
+
+.tag-list-item:hover {
+  background-color: #cccccc29;
+}
+
+.tag-list-item.selected {
+  background-color: #0f273a;
+  color: whitesmoke;
+}

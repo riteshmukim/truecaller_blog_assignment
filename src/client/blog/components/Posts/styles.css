@@ -1,0 +1,21 @@
+.content-section {
+  grid-area: content;
+  padding: 16px;
+}
+
+.content-title {
+  padding-bottom: 8px;
+  font-weight: 500;
+  font-size: 1.1em;
+  line-height: 1.25em;
+  border-bottom: solid 1px #313131;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  padding-top: 16px;
+}

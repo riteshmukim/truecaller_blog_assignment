@@ -1,0 +1,13 @@
+.sidebar {
+  padding: 16px;
+  grid-area: sidebar;
+}
+
+.aside-title {
+  padding-bottom: 8px;
+  font-weight: 500;
+  font-size: 1.1em;
+  line-height: 1.25em;
+  border-bottom: solid 1px #313131;
+  text-transform: uppercase;
+}
