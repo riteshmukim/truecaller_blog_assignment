@@ -6,11 +6,19 @@ import "./styles.css";
 
 SideBar.propTypes = {};
 
-function SideBar({ posts }) {
+function SideBar({
+  selectedCategory,
+  setSelectedCategory,
+  selectedTag,
+  setSelectedTag,
+}) {
   return (
     <div className="sidebar">
-      <Tags />
-      <Categories />
+      <Tags selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
+      <Categories
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
     </div>
   );
 }

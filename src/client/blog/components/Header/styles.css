@@ -3,3 +3,8 @@
   padding: 8px;
   background-color: #0f273a;
 }
+
+.header-img {
+  height: 48px;
+  width: auto;
+}

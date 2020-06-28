@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import PropTypes from "prop-types";
+
+import Article from "./Article";
+import RelatedPosts from "./RelatedPost";
 
 Post.propTypes = {};
 
 function Post(props) {
-  const { id } = useParams();
-  return <div>{id}</div>;
+  const { slug } = useParams();
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("/api/posts/slug", {
+        params: {
+          slug,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setPost(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [slug]);
+
+  return post ? (
+    <div
+      style={{
+        margin: "auto",
+        maxWidth: 720,
+      }}
+    >
+      <Article post={post} />
+      <RelatedPosts post_id={post.ID} />
+    </div>
+  ) : null;
 }
 
 export default Post;

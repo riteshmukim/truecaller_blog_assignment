@@ -2,26 +2,25 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
-  /* padding: 16px; */
   box-shadow: 0 0 1px 0px #313131;
-  /* border-radius: 6px; */
   background-color: white;
 }
 
 .post-img {
   max-width: 100%;
-  /* border-radius: 6px; */
 }
 
 .post-content {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
   padding: 16px;
   flex: 1 0 auto;
+  overflow-wrap: break-word;
 }
 
 .post-title {
-  padding: 8px 0;
+  padding-bottom: 8px;
   font-weight: 400;
   font-size: 1.1em;
   line-height: 1.25em;
@@ -29,8 +28,9 @@
 }
 
 .post-excerpt {
-  padding: 16px 0;
-  /* font-size: 0.9em; */
+  padding: 8px 0;
+  font-size: 0.9em;
+  line-height: 1.2em;
 }
 
 .post-footer {

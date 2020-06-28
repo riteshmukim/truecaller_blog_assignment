@@ -13,21 +13,23 @@ const htmlToReactParser = new HtmlToReact.Parser();
 
 PostItem.propTypes = {};
 
-function PostItem({ post, classes }) {
+function PostItem({ post }) {
   dayjs.extend(relativeTime);
 
   return (
     <article className="article">
-      <Link to={`/post/${post.ID}`}>
-        <img
-          src={post.post_thumbnail.URL}
-          alt={post.title}
-          className="post-img"
-        />
-      </Link>
+      {post.featured_image && (
+        <Link to={`/blog/${post.slug}`}>
+          <img
+            src={post.featured_image}
+            alt={post.title}
+            className="post-img"
+          />
+        </Link>
+      )}
       <div className="post-content">
         <h4 className="post-title">
-          <Link to={`/post/${post.ID}`}>
+          <Link to={`/blog/${post.slug}`}>
             {htmlToReactParser.parse(post.title)}
           </Link>
         </h4>
@@ -35,10 +37,10 @@ function PostItem({ post, classes }) {
           {htmlToReactParser.parse(sanitize(post.excerpt))}
         </div>
         <div className="post-footer">
-          <Link to={`/post/${post.ID}`} className="post-footer-item">
+          <Link to={`/blog/${post.slug}`} className="post-footer-item">
             {dayjs(post.date).fromNow()}
           </Link>
-          <Link to={`/post/${post.ID}`} className="post-footer-item">
+          <Link to={`/blog/${post.slug}`} className="post-footer-item">
             Read More
           </Link>
         </div>

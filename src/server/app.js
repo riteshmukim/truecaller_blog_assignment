@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const api = require("./api");
 
@@ -12,15 +13,17 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api", api);
 
-app.use(express.static("public"));
+const staticPath = path.join(__dirname, "../../public");
 
-// app.get("/*", function (req, res) {
-//   res.sendFile(path.join(__dirname, "../../public/index.html"), function (err) {
-//     if (err) {
-//       res.status(500).send(err);
-//     }
-//   });
-// });
+app.use(express.static(staticPath));
+
+app.use("*", function (req, res) {
+  res.sendFile("index.html", { root: staticPath }, function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -14,6 +14,7 @@ module.exports = {
     path: path.resolve(__dirname, "../public"),
     chunkFilename: "[name].js",
     filename: "[name].js",
+    publicPath: "/",
   },
 
   plugins: [
